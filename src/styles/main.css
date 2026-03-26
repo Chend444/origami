@@ -1,0 +1,159 @@
+:root {
+  --bg: #f0f0f0;
+  --grid: #dddddd;
+  --text: #383838;
+  --green: #4bc87e;
+  --red: #eb4b56;
+  --black: #4a4a4a;
+  --white: #ffffff;
+  --floor-height: 56px;
+  --shaft-width: 88px;
+  --elevator-width: 24px;
+  --elevator-height: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #dedede;
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app {
+  max-width: 980px;
+  margin: 30px auto;
+  padding: 28px;
+  background: var(--bg);
+}
+
+.app__title {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 110px auto 120px;
+  gap: 16px;
+  align-items: start;
+}
+
+.layout__labels,
+.layout__buttons {
+  display: grid;
+  grid-template-rows: repeat(10, var(--floor-height));
+}
+
+/* Small wrapper so each row can hold the button + arrival time label. */
+.floor-control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.floor-label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.building {
+  position: relative;
+  /* Width is set from JS based on elevatorsCount (so it scales). */
+  height: calc(var(--floor-height) * 10);
+}
+
+.building__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 100% var(--floor-height), var(--shaft-width) 100%;
+  border: 1px solid var(--grid);
+}
+
+.building__elevators {
+  position: absolute;
+  inset: 0;
+}
+
+.elevator {
+  /* JS animates this element by changing `bottom` + a single CSS class. */
+  position: absolute;
+  width: var(--elevator-width);
+  height: var(--elevator-height);
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  color: var(--black);
+  background:
+    linear-gradient(90deg, transparent 46%, currentColor 46%, currentColor 54%, transparent 54%),
+    var(--white);
+  transition:
+    bottom linear,
+    color 160ms ease-in-out;
+}
+
+.elevator::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid color-mix(in srgb, currentColor 60%, white 40%);
+}
+
+.elevator--moving {
+  color: var(--red);
+}
+
+.elevator--arrived {
+  color: var(--green);
+}
+
+.elevator--idle {
+  color: var(--black);
+}
+
+.call-button {
+  /* JS toggles these states via CSS classes. */
+  align-self: center;
+  width: 78px;
+  height: 30px;
+  border: 0;
+  border-radius: 2px;
+  color: var(--white);
+  background: var(--green);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.call-button:disabled {
+  cursor: default;
+}
+
+.call-button--waiting {
+  background: var(--red);
+}
+
+.call-button--arrived {
+  color: var(--green);
+  background: #dff5e8;
+  border: 1px solid #bfe6cc;
+}
+
+.call-button__time {
+  display: block;
+  margin-left: 4px;
+  color: #5a5a5a;
+  font-size: 11px;
+  text-align: left;
+  min-height: 12px;
+}
