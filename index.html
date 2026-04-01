@@ -29,11 +29,26 @@
         <div class="building" id="building" aria-hidden="true">
           <div class="building__grid"></div>
           <div class="building__elevators">
-            <div class="elevator elevator--idle" data-elevator-id="0"></div>
-            <div class="elevator elevator--idle" data-elevator-id="1"></div>
-            <div class="elevator elevator--idle" data-elevator-id="2"></div>
-            <div class="elevator elevator--idle" data-elevator-id="3"></div>
-            <div class="elevator elevator--idle" data-elevator-id="4"></div>
+            <div class="elevator elevator--idle" data-elevator-id="0">
+              <span class="elevator__indicator" aria-hidden="true">●</span>
+              <span class="elevator__serviceLabel" aria-hidden="true">Service</span>
+            </div>
+            <div class="elevator elevator--idle" data-elevator-id="1">
+              <span class="elevator__indicator" aria-hidden="true">●</span>
+              <span class="elevator__serviceLabel" aria-hidden="true">Service</span>
+            </div>
+            <div class="elevator elevator--idle" data-elevator-id="2">
+              <span class="elevator__indicator" aria-hidden="true">●</span>
+              <span class="elevator__serviceLabel" aria-hidden="true">Service</span>
+            </div>
+            <div class="elevator elevator--idle" data-elevator-id="3">
+              <span class="elevator__indicator" aria-hidden="true">●</span>
+              <span class="elevator__serviceLabel" aria-hidden="true">Service</span>
+            </div>
+            <div class="elevator elevator--idle" data-elevator-id="4">
+              <span class="elevator__indicator" aria-hidden="true">●</span>
+              <span class="elevator__serviceLabel" aria-hidden="true">Service</span>
+            </div>
           </div>
         </div>
 
@@ -49,6 +64,14 @@
           <div class="floor-control"><button class="call-button" data-floor="2" type="button">Call</button><span class="call-button__time" data-floor-time="2"></span></div>
           <div class="floor-control"><button class="call-button" data-floor="1" type="button">Call</button><span class="call-button__time" data-floor-time="1"></span></div>
           <div class="floor-control"><button class="call-button" data-floor="0" type="button">Call</button><span class="call-button__time" data-floor-time="0"></span></div>
+          <div class="controls">
+            <div class="emergency">
+              <button class="emergency-button" id="emergencyButton" type="button">Emergency</button>
+              <span class="emergency__timer" id="emergencyTimer" aria-live="polite"></span>
+            </div>
+            <button class="clear-button" id="clearQueueButton" type="button">Clear queue</button>
+            <button class="reset-button" id="resetElevatorsButton" type="button">Send all to Ground</button>
+          </div>
         </div>
       </section>
     </main>

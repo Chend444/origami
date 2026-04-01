@@ -1,0 +1,23 @@
+flowchart TD
+  A[Load index.html] --> B[Run main.js]
+  B --> C[startApp]
+  C --> D[Create elevators list]
+  C --> E[Create UI and services]
+  D --> F[Create ElevatorSystem]
+  E --> F
+  F --> G[Initialize UI and bind buttons]
+
+  H[User clicks Call on a floor] --> I[ElevatorSystem.handleCall]
+  I --> J[Add request to queue]
+  J --> K[Button state = Waiting]
+  K --> L[Dispatch work]
+
+  L --> M{Any idle elevators?}
+  M -- No --> N[Do nothing - keep request queued]
+  M -- Yes --> O[Pick nearest idle elevator]
+  O --> P[Mark elevator moving and animate]
+  P --> Q[Beep + mark elevator arrived]
+  Q --> R[Button state = Arrived + show time]
+  R --> S[Wait 2 seconds]
+  S --> T[Reset elevator and reset button]
+  T --> L

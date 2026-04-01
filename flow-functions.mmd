@@ -1,0 +1,37 @@
+flowchart TD
+  A[index.html loads] --> B[src/js/main.js]
+  B --> C[startApp]
+  C --> D[ElevatorSystem.initialize]
+  D --> E[ElevatorUI.initialize]
+  E --> E1[ElevatorUI.cacheElements]
+  E --> E2[ElevatorUI.sizeBuildingToMatchElevators]
+  E --> E3[ElevatorUI.positionElevatorsAtGroundFloor]
+  E --> E4[ElevatorUI.bindCallButtons]
+
+  F[User click .call-button] --> G[ElevatorUI.bindCallButtons handler]
+  G --> H[ElevatorSystem.handleCall]
+  H --> H1[ElevatorUI.setButtonWaiting]
+  H --> I[ElevatorSystem.dispatch]
+
+  I --> J[Elevator.isIdle]
+  I --> K[NearestElevatorPicker.pick]
+  K --> K1[Elevator.distanceTo]
+  I --> L[ElevatorSystem.serveRequest]
+
+  L --> L1[Elevator.markMoving]
+  L --> L2[ElevatorUI.setElevatorMoving]
+  L --> L3[Elevator.distanceTo]
+  L --> L4[ElevatorUI.moveElevatorToFloor]
+  L4 --> L4a[ElevatorUI.getElevatorBottomPx]
+
+  L --> L5[AudioService.beep]
+  L --> L6[Elevator.markArrived]
+  L --> L7[ElevatorUI.setElevatorArrived]
+  L --> L8[ElevatorUI.setButtonArrived]
+  L8 --> L8a[formatDuration]
+
+  L --> L9[sleep]
+  L --> L10[Elevator.markIdle]
+  L --> L11[ElevatorUI.setElevatorIdle]
+  L --> L12[ElevatorUI.resetButton]
+  L --> L13[ElevatorSystem.dispatch]
